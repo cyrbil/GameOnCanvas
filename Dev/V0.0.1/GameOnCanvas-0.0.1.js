@@ -1,3 +1,6 @@
+// Old file
+// many things moved
+
 function game(rectangle, antialiasing) {
 	console.info("Log: Game Instancied");
 	var rectangle;
