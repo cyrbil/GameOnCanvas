@@ -1,0 +1,13 @@
+Version 0.1.0
+
+GameOnCanvas as been review to limit it functionnality.
+There is now 3 class:
+Goc
+scene
+object
+
+Goc is the main script, it's make the canvas, load ressource, launch game, run the game.
+scene is a class to create a scene of objects, it's like a groupe of object, it can be moved and display as object
+you can include scene inside scene.
+finally object is an object, it can be draw on the screen and contain various variable such as position, speed, etc ...
+
