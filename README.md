@@ -2,9 +2,9 @@
 
 **GameOnCanvas** (or GOC) is a small, free JavaScript frameword for manipulating
 canvas elements to create animations or game for recent navigators. 
-It‚Äôs fully oriented object and included many kickass functionalities.
+Itís fully oriented object and included many kickass functionalities.
 
-The GOC‚Äôs main purpose is to go beyond the standard canvas API for browser. 
+The GOCís main purpose is to go beyond the standard canvas API for browser. 
 It improves compatibility and come with many objects that can be draw and 
 easily animated.
 
@@ -24,9 +24,9 @@ game.resources = {
 }
 
 // create our first scene that just contains the background...
-// we add a new object to the scene, coming from the in game resource ‚Äúbackground‚Äù
+// we add a new object to the scene, coming from the in game resource ìbackgroundî
 var gameScene = new scene([
-// preloaded resources are in game‚Äôs ‚Äúresources‚Äù object
+// preloaded resources are in gameís ìresourcesî object
 	new obj(game.resources.background)
 ]);
 // obj can be image, resources or shapes
@@ -39,7 +39,7 @@ game.currentScene = gameScene;
 // main function is called right before render and display
 game.main = function(){
 	// if we click, add a ball at mouse coord
-	if(game.mouse.left){ // mouse object contain coord and button‚Äô state
+	if(game.mouse.left){ // mouse object contain coord and buttoní state
 		// create new object from the ball image
 		var ball = new obj(game.ressources["ball"]);
 		ball.x = game.mouse.x; // set coord to current mouse coord
