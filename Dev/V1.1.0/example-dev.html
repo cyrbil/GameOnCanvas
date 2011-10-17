@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>GameOnCanvas - Example</title>
+		<meta name="author" content="Cyrbil">
+		<script src="class_main.js"></script>
+		<script src="class_object.js"></script>
+		<script src="class_scene.js"></script>
+	</head>
+	
+		<script type="text/javascript">
+            var background   = new elem();
+                background.draw = function(ctx){
+                    ctx.fillStyle = "rgba(0,0,0,1)";
+                    ctx.fillRect(0,0,1200,600);
+                }
+            var ball         = new elem();
+                ball.draw = function(ctx){
+                    ctx.fillStyle = "rgba(0,200,0,1)";
+                    ctx.fillRect(this.x,this.y,20,20);
+                }
+                ball.speed = 8;
+                ball.direction = 315;
+                ball.x = 200;
+                ball.y = 10;
+            var player_left       = new elem();
+                player_left.draw  = function(ctx){
+                    ctx.fillStyle = "rgba(200,200,0,1)";
+                    ctx.fillRect(this.x,this.y,15,100);
+                }
+                player_left.x = 100;
+                player_left.y = 300;
+            var player_right      = new elem();
+                player_right.draw = function(ctx){
+                    ctx.fillStyle = "rgba(200,200,0,1)";
+                    ctx.fillRect(this.x,this.y,15,100);
+                }
+                player_right.x = 1100;
+                player_right.y = 300;
+            var score_left        = new elem();
+                score_left.draw   = function(ctx){
+                    ctx.font = "80pt Verdana";
+                    ctx.fillStyle = "rgba(255,255,255,0.5)";
+                    ctx.fillText(this.text,500,100);
+                }
+                score_left.text = 0;
+            var score_right       = new elem();
+                score_right.draw  = function(ctx){
+                    ctx.font = "80pt Verdana";
+                    ctx.fillStyle = "rgba(255,255,255,0.5)";
+                    ctx.fillText(this.text,645,100);
+                }
+                score_right.text = 0;
+            var separator         = new elem();
+                separator.draw    = function(ctx){
+                    ctx.fillStyle = "rgba(200,200,200,0.5)";
+                    ctx.fillRect(600,0,10,600);
+                }
+            
+            var display = new scene();
+            // order matters
+            display.add(background);
+            display.add(separator);
+            display.add(ball);
+            display.add(player_left);
+            display.add(player_right);
+            display.add(score_left);
+            display.add(score_right);
+            
+            var game = new game(
+                {
+                    w:600,
+                    h:300,
+                    a:2,
+                    fps:30,
+                    canvas_inner: "Ce jeu n&eacute;cessite que votre navigateur soit compatible avec la technologie canvas.",
+                    debug: true,
+                    ie_support: true,
+                    scene: display,
+                    main: function(){
+                        //var ball = this.scene;
+                        if( ball.y < 1 ){ // if ball touch up or down border
+                            // reverse direction (bounce)
+                            if     ( ball.direction == 315 ) ball.direction = 45;
+                            else if( ball.direction == 225 ) ball.direction = 135;
+                        }else if( ball.y > 585 ){
+                            if     ( ball.direction == 45 ) ball.direction = 315;
+                            else if( ball.direction == 135 ) ball.direction = 225;
+                        }
+                        
+                        
+                        
+                        if( ball.x < 1 || ball.x > 1199 ){ // if ball touch left or right
+                            // game over, update score.
+                            if(ball.x < 1){ // left player loose, right++
+                                score_right.text++;
+                                ball.x = 200;
+                                ball.direction = (Math.random()>0.5)?45:315; 
+                                
+                            }else{
+                                score_left.text++;
+                                ball.x = 1000;
+                                ball.direction = (Math.random()>0.5)?225:135;
+                            }
+                            ball.y = Math.random()*500 + 50;
+                        }
+                        
+                        // if ball touch player left
+                        if(ball.x <= 115 && ball.x > 100 && ball.y > player_left.y && ball.y < player_left.y + 100){
+                            if     ( ball.direction == 135 ) ball.direction = 45;
+                            else if( ball.direction == 225 ) ball.direction = 315;
+                        }else if(ball.x >= 1080 && ball.x < 1100 && ball.y > player_right.y && ball.y < player_right.y + 100){ // if ball touch player right
+                            if     ( ball.direction == 45  ) ball.direction = 135;
+                            else if( ball.direction == 315 ) ball.direction = 225;
+                        }
+                        
+                        keypress={up:this.keyboard.code==38,down:this.keyboard.code==40};
+                        
+                        if(keypress.up && player_left.y>0)
+                            player_left.y-=10;
+                        if(keypress.down && player_left.y<500)
+                            player_left.y+=10;
+                        
+                        if(ball.y > player_right.y+50)
+                            player_right.y+=5;
+                        else if(ball.y < player_right.y+50)
+                            player_right.y-=5;
+                        
+                    }
+                }
+            );
+            
+            game.scene = display;
+		</script>
+	<body>
+    </body>
+</html>
