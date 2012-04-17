@@ -24,9 +24,9 @@ model.
     }
     
     // create our first scene that just contains the background...
-    // we add a new object to the scene, coming from the in game resource �background�
+    // we add a new object to the scene, coming from the in game resource background
     var gameScene = new scene([
-        // preloaded resources are in game�s �resources� object
+        // preloaded resources are in game's resources object
         new obj(game.resources.background)
     ]);
     // obj can be image, resources or shapes
@@ -39,7 +39,7 @@ model.
     // main function is called right before render and display
     game.main = function(){
         // if we click, add a ball at mouse coord
-        if(game.mouse.left){ // mouse object contain coord and button� state
+        if(game.mouse.left){ // mouse object contain coord and button state
             // create new object from the ball image
             var ball = new obj(game.ressources["ball"]);
             ball.x = game.mouse.x; // set coord to current mouse coord
