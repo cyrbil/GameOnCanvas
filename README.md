@@ -2,9 +2,9 @@
 
 **GameOnCanvas** (or GOC) is a small, free JavaScript frameword for manipulating
 canvas elements to create animations or game for recent navigators. 
-It�s fully oriented object and included many kickass functionalities.
+It' fully oriented object and included many kickass functionalities.
 
-The GOC�s main purpose is to go beyond the standard canvas API for browser. 
+The GOC's main purpose is to go beyond the standard canvas API for browser. 
 It improves compatibility and come with many objects that can be draw and 
 easily animated.
 
@@ -19,15 +19,15 @@ model.
     
     // preload resources, not necessary but speed up next load (in game)
     game.resources = {
-	background: "http://www.mywebsite.com/images/backgrounnd.png ",
-	ball: "img/ball.jpg"
+        background: "http://www.mywebsite.com/images/backgrounnd.png ",
+        ball: "img/ball.jpg"
     }
     
     // create our first scene that just contains the background...
     // we add a new object to the scene, coming from the in game resource �background�
     var gameScene = new scene([
-    // preloaded resources are in game�s �resources� object
-    new obj(game.resources.background)
+        // preloaded resources are in game�s �resources� object
+        new obj(game.resources.background)
     ]);
     // obj can be image, resources or shapes
     
@@ -38,19 +38,19 @@ model.
     // here start the real game code
     // main function is called right before render and display
     game.main = function(){
-    // if we click, add a ball at mouse coord
-    if(game.mouse.left){ // mouse object contain coord and button� state
-    // create new object from the ball image
-    var ball = new obj(game.ressources["ball"]);
-    ball.x = game.mouse.x; // set coord to current mouse coord
-    ball.y = game.mouse.y;
-    ball.v = new vector(1, Math.random()*360); // random direction ... speed 1
-    // add an event called for each frame (because balls are always moving in our example)
-    ball.onMove = function(){
-    if(this.touch(gameScene[0]))// if the ball touch one background border
-    this.vector.direction += ((this.vector.direction%180>90)?280:90)%360; // reverse direction
-    }
-    // finally // add the new ball object to the current animated scene.
-    game.currentScene.add(ball);
-    }
+        // if we click, add a ball at mouse coord
+        if(game.mouse.left){ // mouse object contain coord and button� state
+            // create new object from the ball image
+            var ball = new obj(game.ressources["ball"]);
+            ball.x = game.mouse.x; // set coord to current mouse coord
+            ball.y = game.mouse.y;
+            ball.v = new vector(1, Math.random()*360); // random direction ... speed 1
+            // add an event called for each frame (because balls are always moving in our example)
+            ball.onMove = function(){
+                if(this.touch(gameScene[0]))// if the ball touch one background border
+                    this.vector.direction += ((this.vector.direction%180>90)?280:90)%360; // reverse direction
+            }
+            // finally // add the new ball object to the current animated scene.
+            game.currentScene.add(ball);
+        }
     };
